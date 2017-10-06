@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--TREE View of FISRT MODEL-->
+    <record id="first_tree_view" model="ir.ui.view">
+        <field name="name">first.tree.view</field>
+        <field name="model">class.first</field>
+        <field name="arch" type="xml">
+            <tree string="Tree of First Model">
+                <field name="name" />
+                <field name="number_interger" />
+                <field name="number_float" />
+                <field name="date_field" />
+                <field name="datetime_field" />
+                <field name="text_field" />
+                <field name="boolean_field" />
+                <field name="selection_field" />
+                <field name="city_id" />
+                <field name="partner_id" />
+                <field name="lines" />
+            </tree>
+        </field>
+    </record>
+
+    <!--FORM View of FISRT MODEL-->
+    <record id="first_form_view" model="ir.ui.view">
+        <field name="name">first.form.view</field>
+        <field name="model">class.first</field>
+        <field name="arch" type="xml">
+            <form string="Form Giro">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="number_interger" />
+                            <field name="number_float" />
+                            <field name="date_field" />
+                            <field name="city_id" />
+                            <field name="partner_id" />
+                        </group>
+                        <group>
+                            <field name="datetime_field" />
+                            <field name="text_field" />
+                            <field name="boolean_field" />
+                            <field name="selection_field" />
+                            <field name="lines" />
+                        </group>
+                    </group>
+                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="action_first_class" model="ir.actions.act_window">
+        <field name="name">action first class</field>
+        <field name="res_model">class.first</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create the frist record
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="fisrt_top_menu" name="MENU FIRST" sequence="0" />
+    <menuitem id="fisrt_sub_menu" name="MENU FIRST in SUB" sequence="0" parent="fisrt_top_menu" />
+    <menuitem id="first_menu_action" action="action_first_class" name="Action Menu Execute" sequence="0" parent="fisrt_sub_menu"/>
+
+</odoo>
