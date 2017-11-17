@@ -1,4 +1,4 @@
-Nurosoft Custom Forecast
+Task History of Version
 ========================================================================
 
     -
@@ -7,7 +7,4 @@ Nurosoft Custom Forecast
 Contributors
 ------------
 
-* Abdillahwahab <mdillahw@nurosoft-indonesia.com>
-
-
-
+* Blankidea <blankidea409@gmail.com>
