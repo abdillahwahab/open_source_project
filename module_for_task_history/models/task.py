@@ -1,5 +1,7 @@
 from odoo import api, fields, models
 from odoo.tools.translate import _
+import pytz
+from datetime import datetime, timedelta
 
 class Task(models.Model):
     _inherit = 'project.task'
@@ -30,20 +32,29 @@ class ModuleName(models.Model):
                 rec.last_desc = ''
 
     def mengcopy(self):
+        tz = pytz.utc
+        if self.env.user.tz:
+            tz = pytz.timezone(self.env.user.tz)
+
         strdata = "===============================================================================\n"
         strdata +='Module Name (folder) : ' + self.name + '\n'
         strdata +='Module Name (at Odoo) : ' + self.module_name + '\n'
         strdata +='Version : ' + self.last_version + '\n'
         last = self.env['dila.module.revisi'].search([('module_id','=',self.id)],limit=1, order='id desc')
         if last:
-            strdata +='Start Todo : ' + last.start_todo + '\n'
-            strdata +='Date Release : ' + last.date_release + '\n'
+            start_todo = pytz.utc.localize(datetime.strptime(last.start_todo, "%Y-%m-%d %H:%M:%S")).astimezone(tz)
+            strdata +='Start Todo : ' + str(start_todo) + '\n'
+            date_release = pytz.utc.localize(datetime.strptime(last.date_release, "%Y-%m-%d %H:%M:%S")).astimezone(tz)
+            strdata +='Date Release : ' + str(date_release) + '\n'
             strdata +='Description : ' + last.description + '\n'
         strdata += "===============================================================================\n"
         import pyperclip
         pyperclip.copy(strdata)
         #import os 
         #os.system("echo '%s' | clipboard" % strdata)
+
+
+
 
 class Revisi(models.Model):
     _name = 'dila.module.revisi'
@@ -64,7 +75,7 @@ class Revisi(models.Model):
             i = 0
             for ln in rec.desc_ids:
                 i += 1
-                str_desc += str(i) +'. '+ ln.name + "\n"
+                str_desc += str(i) +'. '+ ln.name + ("\n" if not ln.reason else (ln.reason + '\n'))
             rec.description = str_desc
 
     def open_list_todo(self):
@@ -96,3 +107,4 @@ class Revisi_list(models.Model):
     revisi_id = fields.Many2one('dila.module.revisi')
     name = fields.Char(string="Description", required=True)
     reason = fields.Char(string="Reason")
+

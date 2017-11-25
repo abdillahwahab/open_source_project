@@ -78,6 +78,7 @@
                 <form string="Form Module Revisi">
                     <sheet>
                         <button name="mengcopy" string="Copy to Clipboard" type="object" />
+                        <!--button name="try_scrap" string="Scrap" type="object" /-->
                         <group>
                             <group>
                                 <field name="name" />
