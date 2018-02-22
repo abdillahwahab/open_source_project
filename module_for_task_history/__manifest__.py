@@ -4,19 +4,16 @@
     "name": "Task History of Version",
     "author": "abdillahwahab",
     "website": "www.abdillahwahab.com",
-    "version": "1.0.0",
+    "version": "1.2",
     "category": "project",
     "depends": [
-        "project"
+        "base",
+        "project",
     ],
     "data": [ 
         "view/task.xml"
     ],
-    "qweb": [
-    ],
-    'price': '50',
-    'currency': "USD",
-
     "license": 'LGPL-3',
+    
     'installable': True
 }
